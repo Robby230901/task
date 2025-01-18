@@ -26,6 +26,9 @@ app.use('/api/tasks', taskRotta);
 
 // Servire i file statici dal frontend in produzione
 if (process.env.NODE_ENV === 'production') {
+    // Usa import.meta.url per ottenere il percorso dell'attuale modulo
+    const __dirname = path.dirname(new URL(import.meta.url).pathname);
+
     // Serve i file statici generati dalla build di React
     app.use(express.static(path.join(__dirname, 'frontend', 'build')));
 
@@ -37,3 +40,4 @@ if (process.env.NODE_ENV === 'production') {
 
 // Avvio del server
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+
